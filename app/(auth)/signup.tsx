@@ -23,7 +23,7 @@ export default () => {
 
         try {
             await createUserWithEmailAndPassword( auth, inputEmail, inputPassword );
-            router.navigate("/");
+            router.replace("/");
         } catch ( error ) {
             setInputError("Что-то пошло не так...");
         }
