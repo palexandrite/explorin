@@ -2,6 +2,7 @@
 .idea
 .expo
 node_modules/
+Screenshots/
 .env
 dist/
 npm-debug.*
