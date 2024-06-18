@@ -19,13 +19,13 @@ export default {
         },
         "android": {
             "adaptiveIcon": {
-            "foregroundImage": "./assets/images/adaptive-icon.png",
-            "backgroundColor": "#ffffff"
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
             },
             "permissions": [
-            "android.permission.INTERNET",
-            "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE"
+                "android.permission.INTERNET",
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
             ]
         },
         "web": {
@@ -36,18 +36,24 @@ export default {
         "plugins": [
             "expo-router",
             [
-            "expo-build-properties",
-            {
-                "android": {
-                "compileSdkVersion": 34,
-                "targetSdkVersion": 34,
-                "buildToolsVersion": "34.0.0",
-                "usesCleartextTraffic": true
-                },
-                "ios": {
-                "deploymentTarget": "13.4"
+                "expo-location",
+                {
+                    "locationAlwaysAndWhenInUsePermission": "Разрешите $(PRODUCT_NAME) использовать Ваше местоположение."
                 }
-            }
+            ],
+            [
+                "expo-build-properties",
+                {
+                    "android": {
+                        "compileSdkVersion": 34,
+                        "targetSdkVersion": 34,
+                        "buildToolsVersion": "34.0.0",
+                        "usesCleartextTraffic": true
+                    },
+                    "ios": {
+                        "deploymentTarget": "13.4"
+                    }
+                }
             ]
         ],
         "experiments": {

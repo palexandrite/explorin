@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import { useFonts } from "expo-font";
 
 import { useSession } from "@/contexts/AuthContext";
@@ -15,23 +14,23 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 SplashScreen.preventAutoHideAsync();
 
 export default function AppLayout() {
-    const { currentUser, isLoading } = useSession();
+    const { currentUser } = useSession();
     const colorScheme = useColorScheme();
-    const [ fontsLoaded ] = useFonts({
+    const [fontsLoaded] = useFonts({
         SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
     });
 
     useEffect(() => {
-        if ( fontsLoaded ) {
+        if (fontsLoaded) {
             SplashScreen.hideAsync();
         }
-    }, [ fontsLoaded ]);
+    }, [fontsLoaded]);
 
-    if ( !fontsLoaded ) {
+    if (!fontsLoaded) {
         return null;
     }
 
-    if ( !currentUser ) {
+    if (!currentUser) {
         // On web, static rendering will stop here as the user is not authenticated
         // in the headless Node process that the pages are rendered in.
         return <Redirect href="/sign-in" />;
@@ -39,7 +38,7 @@ export default function AppLayout() {
 
     return (
         <SafeAreaProvider>
-            <ThemeProvider value={ colorScheme === "dark" ? DarkTheme : DefaultTheme }>
+            <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
                 <Stack>
                     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 </Stack>

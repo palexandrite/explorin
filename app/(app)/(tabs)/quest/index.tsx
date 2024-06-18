@@ -6,19 +6,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link, Stack } from "expo-router";
 
-const mock = [
-    {
-        title: "Путешествие до дворца",
-        image: require("@/assets/images/quests/XXXL.png"),
-        address: "ул. Центральная 50",
-        url: "/quest/item",
-    }, {
-        title: "Поиск сокровищ",
-        image: require("@/assets/images/quests/b9RSJfIqpgVvYKr-TUl3idYif0Q2cYEe6AfIElXlfQhWzWAODo_MBTc6GLO9nCva8pnfkfA9WlDx_2nU8iZtdByWxxUxyHUjnZMZOY5LFft34-tElnFBD7kFfz.png"),
-        address: "ул. Энгельса 50",
-        url: "/quest/item",
-    }
-];
+import { Quests } from "@/mocks/Quests";
 
 export default function TabThreeScreen() {
 
@@ -29,45 +17,45 @@ export default function TabThreeScreen() {
             <ParallaxScrollView
                 headerBackgroundColor={{ light: "#5e776b", dark: "#5e776b" }}
             >
-                
-                <ThemedView style={[ styles.header ]}>
+
+                <ThemedView style={[styles.header]}>
                     <ThemedText type="h1" style={{ alignSelf: "center", color: "#fff" }}>Квесты</ThemedText>
                 </ThemedView>
 
                 {
-                    mock.map((m, i) => {
+                    Quests.map((m, i) => {
 
                         return (
-                            <Link key={ i } href={{ 
-                                pathname: m.url, 
-                                params: { name: m.title, image: m.image, address: m.address } 
+                            <Link key={i} href={{
+                                pathname: "/quest/item",
+                                params: { itemId: m.id }
                             }} asChild>
                                 <Pressable>
-                                    <Card containerStyle={ styles.card }>
+                                    <Card containerStyle={styles.card}>
                                         <Card.Image
-                                            style={ styles.cardImage }
-                                            source={ m.image }
+                                            style={styles.cardImage}
+                                            source={m.cover}
                                         />
 
-                                        <ThemedText type="h1" style={[ styles.cardText ]}>
-                                            { m.title }
+                                        <ThemedText type="h1" style={[styles.cardText]}>
+                                            {m.title}
                                         </ThemedText>
 
-                                        <ThemedText type="defaultSemiBold" style={[ styles.cardText ]}>
-                                            { m.address }
+                                        <ThemedText type="defaultSemiBold" style={[styles.cardText]}>
+                                            {m.address}
                                         </ThemedText>
 
                                         <View style={{ flexDirection: "row" }}>
-                                                
-                                            <ThemedText style={ styles.cardText }>
+
+                                            <ThemedText style={styles.cardText}>
                                                 50 мин
                                             </ThemedText>
 
-                                            <ThemedText style={ styles.cardText }>
+                                            <ThemedText style={styles.cardText}>
                                                 4 км
                                             </ThemedText>
 
-                                            <ThemedText style={ styles.cardText }>
+                                            <ThemedText style={styles.cardText}>
                                                 500
                                             </ThemedText>
 
@@ -99,7 +87,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     cardImage: {
-        width: "100%", 
+        width: "100%",
         resizeMode: "cover",
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,

@@ -6,10 +6,21 @@ import { ThemedText } from "@/components/ThemedText";
 import { Icon } from "@/components/Icon";
 import { Button } from "@rneui/themed";
 
-const mockBodyText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quam autem rerum reprehenderit, praesentium maxime repellat tempore voluptas quis?";
+import { Quests } from "@/mocks/Quests";
+
+type Item = {
+    id: number,
+    title: string,
+    cover: any,
+    address: string,
+    items: number[],
+    brief: string
+};
 
 export default () => {
-    const { address, image, name } = useLocalSearchParams();
+    const { itemId } = useLocalSearchParams();
+
+    let quest = Quests.find((item: Item): boolean => item.id == itemId);
 
     return (
         <>
@@ -17,53 +28,58 @@ export default () => {
 
             <ParallaxScrollView
                 headerBackgroundColor={{ light: "#5e776b", dark: "#5e776b" }}
-                headerImage={ <Image style={{ width: "100%", height: "100%" }} source={ image } /> }
+                headerImage={<Image style={{ width: "100%", height: "100%" }} source={quest?.cover} />}
             >
 
-                <ThemedText type="h1" style={{ paddingStart: 30 }}>{ name }</ThemedText>
+                <ThemedText type="h1" style={{ paddingStart: 30 }}>
+                    {quest?.title}
+                </ThemedText>
 
-                <ThemedText type="defaultSemiBold" style={[ styles.text ]}>
-                    { address }
+                <ThemedText type="defaultSemiBold" style={[styles.text]}>
+                    {quest?.address}
                 </ThemedText>
 
                 <View style={{ flexDirection: "row" }}>
-                                                
-                    <ThemedText style={ styles.text }>
+
+                    <ThemedText style={styles.text}>
                         50 мин
                     </ThemedText>
 
-                    <ThemedText style={ styles.text }>
+                    <ThemedText style={styles.text}>
                         4 км
                     </ThemedText>
 
-                    <ThemedText style={ styles.text }>
+                    <ThemedText style={styles.text}>
                         500
                     </ThemedText>
 
                 </View>
 
-                <View style={ styles.buttonContainer }>
+                <View style={styles.buttonContainer}>
                     <Button
-                        title={ "Начать" }
-                        containerStyle={{ 
+                        title={"Начать"}
+                        containerStyle={{
                             flexGrow: 1, paddingTop: 3
-                         }}
+                        }}
                         buttonStyle={{ backgroundColor: "#886b57", borderRadius: 20 }}
                         titleStyle={{ fontWeight: "bold", fontSize: 25 }}
-                        onPress={ () => router.navigate({ pathname: "../../active-quest", params: { image: image } }) }
+                        onPress={() => router.navigate({
+                            pathname: "/quest/map",
+                            params: { questId: quest?.id }
+                        })}
                     />
 
-                    <Link href={{ pathname: "../../path" }} asChild>
+                    <Link href={{ pathname: "/quest/map" }} asChild>
                         <Pressable>
-                            <Icon name="arrows-turn-to-dots" color="#886b57" style={ styles.icon } />
+                            <Icon name="arrows-turn-to-dots" color="#886b57" style={styles.icon} />
                         </Pressable>
                     </Link>
                 </View>
 
-                <ThemedText type="h1" style={ styles.body }>Описание</ThemedText>
+                <ThemedText type="h1" style={styles.body}>Описание</ThemedText>
 
-                <ThemedText style={ styles.body }>
-                    { mockBodyText.repeat(10) }
+                <ThemedText style={styles.body}>
+                    {quest?.brief}
                 </ThemedText>
 
             </ParallaxScrollView>

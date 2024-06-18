@@ -10,14 +10,10 @@ const mock = [
     {
         title: "Памятники",
         image: require("@/assets/images/landmarks/yastatic.net_b9RSJfIqpgVvYKr-TUl3idYif0Q2cYEe6AfIElXlfQhWzWAODo_MBTc6GAN9TCvawplv8fAtqjCRPxnU8iZtdByWxxUxyHUjnZMZOY5LFft34-tElnFBD7kFfz.png"),
-        // year: 1950,
-        // creator: ["Василий Николаев"],
         url: "/collection/landmarks",
     }, {
         title: "Значимые места",
         image: require("@/assets/images/landmarks/b9RSJfIqpgVvYKr-TUl3idYif0Q2cYEe6AfIElXlfQhWzWAODo_MBTc6SON9rOs7IxlvkfDtemDRLu4SokZp9swwE7dByZUjrEIY6D6r9YgGYxvkh6Qkz8ulc.png"),
-        // year: 2013,
-        // creator: ["Алекси Фурин"],
         url: "/collection/importances",
     }
 ];

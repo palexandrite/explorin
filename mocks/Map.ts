@@ -1,8 +1,4 @@
-import { WebView } from "react-native-webview";
-
-export default function HomeScreen() {
-
-    const initHtml = `
+export const initMapHtml = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -14,6 +10,7 @@ export default function HomeScreen() {
 
             <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
             <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+            <script src="https://unpkg.com/lrm-graphhopper@1.3.0/src/L.Routing.GraphHopper.js"></script>
 
             <title>Map</title>
 
@@ -33,29 +30,7 @@ export default function HomeScreen() {
         <body>
             
             <div id="map" class="leaflet-container"></div>
-
-            <script>
-
-                const map = L.map('map').setView([45.05042023734998, 38.94722735156248], 12);
             
-                const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
-            
-            </script>
         </body>
         </html>
     `;
-
-    return (
-        <>
-            {/* <Stack.Screen options={{ headerShown: false }} /> */}
-
-            <WebView
-                source={{ html: initHtml }}
-            />
-
-        </>
-    );
-}
