@@ -20,9 +20,9 @@ export default () => {
             >
 
                 <View style={styles.header}>
-                    <ThemedText type="h1" style={{ flexGrow: 1 }}>{name}</ThemedText>
+                    <ThemedText type="h1" style={{ flex: 1 }}>{name}</ThemedText>
 
-                    <Link href={{ pathname: "/path", params: { position: position, targetName: name } }} asChild>
+                    <Link style={{ flex: 1 }} href={{ pathname: "/path", params: { position: position, targetName: name } }} asChild>
                         <Pressable>
                             <Icon name="arrows-turn-to-dots" color="#886b57" style={styles.icon} />
                         </Pressable>
@@ -42,6 +42,7 @@ export default () => {
 
 const styles = StyleSheet.create({
     header: {
+        flex: 1,
         flexDirection: "row",
         paddingStart: 30,
         paddingEnd: 30,

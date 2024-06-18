@@ -66,8 +66,8 @@ export default () => {
     };
 
     const currentQuest = Quests.find((quest: Item): boolean => quest.id == questId);
-    const currentQuestion = step == 1 ? currentQuest?.quiz[0].question : currentQuest?.quiz[step - 1].question;
-    const currentAnswer = step == 1 ? currentQuest?.quiz[0].answer : currentQuest?.quiz[step - 1].answer;
+    const currentQuestion = step == 1 ? currentQuest?.quiz[0].question : currentQuest?.quiz[step - 1]?.question;
+    const currentAnswer = step == 1 ? currentQuest?.quiz[0].answer : currentQuest?.quiz[step - 1]?.answer;
 
     const handleInputChange = (value: string) => {
         setInputText(value);

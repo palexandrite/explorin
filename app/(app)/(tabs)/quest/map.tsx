@@ -12,6 +12,8 @@ import { Button } from "@rneui/base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth } from "firebase/auth";
 
+import FogOfWar from "@/components/FogOfWar";
+
 type Item = {
     id: number,
     title: string,
@@ -115,6 +117,8 @@ export default () => {
                                 // injectedJavaScriptObject={{ targetPosition: targetPosition }}
                                 injectedJavaScript={myscript}
                             />
+
+                            <FogOfWar />
 
                             <Button
                                 title={
