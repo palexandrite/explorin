@@ -12,6 +12,7 @@ import { ThemedView } from "@/components/ThemedView";
 import Timer from "@/components/Timer";
 
 import { Quests } from "@/mocks/Quests";
+import { getAuth } from "firebase/auth";
 
 type Item = {
     id: number,
@@ -23,6 +24,10 @@ type Item = {
 };
 
 export default () => {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
     const insets = useSafeAreaInsets();
     const { questId } = useLocalSearchParams();
 
@@ -36,7 +41,7 @@ export default () => {
         (async () => {
             if (!isStepSet) {
                 try {
-                    const key = `started-quest-${questId}`;
+                    const key = `${user?.email}-started-quest-${questId}`;
                     const currentStep = await AsyncStorage.getItem(key);
                     if (currentStep !== null) {
                         setStep(Number(currentStep) + 1);
@@ -76,8 +81,8 @@ export default () => {
         if (isItCorrect) {
             (async () => {
                 try {
-                    const key = `started-quest-${questId}`;
-                    const successKey = `finished-quest-${questId}`;
+                    const key = `${user?.email}-started-quest-${questId}`;
+                    const successKey = `${user?.email}-finished-quest-${questId}`;
                     await AsyncStorage.setItem(key, String(step));
                     if (step < 3) {
                         router.navigate({

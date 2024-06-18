@@ -12,11 +12,13 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { auth } from "@/config/firebase";
 
 export default function TabFourScreen() {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
     const colorScheme = useColorScheme();
-    const user = getAuth().currentUser;
     const [successQuest, setSuccessQuest] = useState(false);
     const [doneQuestAmount, setDoneQuestAmount] = useState(0);
     const [doneQuestionAmount, setDoneQuestionAmount] = useState(0);
@@ -33,8 +35,8 @@ export default function TabFourScreen() {
                 let startedQuestKeys = [];
 
                 for (let i = 1; i <= 2; i++) {
-                    const key = `started-quest-${i}`;
-                    const successKey = `finished-quest-${i}`;
+                    const key = `${user?.email}-started-quest-${i}`;
+                    const successKey = `${user?.email}-finished-quest-${i}`;
                     finishedQuestKeys.push(successKey);
                     startedQuestKeys.push(key);
                 }

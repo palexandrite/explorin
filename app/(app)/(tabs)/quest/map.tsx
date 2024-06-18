@@ -10,6 +10,7 @@ import { Collections } from "@/mocks/Collections";
 import { Quests } from "@/mocks/Quests";
 import { Button } from "@rneui/base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuth } from "firebase/auth";
 
 type Item = {
     id: number,
@@ -21,6 +22,10 @@ type Item = {
 };
 
 export default () => {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorRequestLocationMsg, setErrorRequestLocationMsg] = useState<string | null>(null);
     const { questId } = useLocalSearchParams();
@@ -40,7 +45,7 @@ export default () => {
                 let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
                 setLocation(location);
 
-                const key = `started-quest-${questId}`;
+                const key = `${user?.email}-started-quest-${questId}`;
                 const isStarted = await AsyncStorage.getItem(key);
                 if (isStarted !== null) {
                     setButtonText("Продолжить");
