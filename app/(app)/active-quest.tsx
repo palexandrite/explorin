@@ -85,14 +85,15 @@ export default () => {
                     const successKey = `${user?.email}-finished-quest-${questId}`;
                     await AsyncStorage.setItem(key, String(step));
                     if (step < 3) {
-                        router.navigate({
-                            pathname: "/quest/map",
-                            params: { questId: questId }
-                        });
+                        setStep(step + 1);
+                        setInputText("");
                     } else {
                         await AsyncStorage.setItem(successKey, String(questId));
                         await AsyncStorage.setItem("Success", "1");
-                        router.navigate("/profile");
+                        router.navigate({
+                            pathname: "/quest/map",
+                            params: { questId: questId, finished: "1" }
+                        });
                     }
                 } catch (error) {
                     console.error(error);

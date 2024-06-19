@@ -29,8 +29,9 @@ export default () => {
 
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorRequestLocationMsg, setErrorRequestLocationMsg] = useState<string | null>(null);
-    const { questId } = useLocalSearchParams();
+    const { finished, questId } = useLocalSearchParams();
     const [buttonText, setButtonText] = useState("Старт");
+    const [isFinished, setIsFinished] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -50,6 +51,12 @@ export default () => {
                 const isStarted = await AsyncStorage.getItem(key);
                 if (isStarted !== null) {
                     setButtonText("Продолжить");
+                }
+
+                const finishedKey = `${user?.email}-finished-quest-${questId}`;
+                const isExistAsFinished = await AsyncStorage.getItem(finishedKey);
+                if (isExistAsFinished || finished) {
+                    setIsFinished(true);
                 }
             } catch (error) {
                 console.error(error);
@@ -134,25 +141,29 @@ export default () => {
 
                             {/* <FogOfWar /> */}
 
-                            <Button
-                                title={
-                                    buttonText
-                                }
-                                containerStyle={{
-                                    position: "absolute",
-                                    zIndex: 5,
-                                    bottom: 30,
-                                    left: 0,
-                                    right: 0,
-                                    paddingHorizontal: 20,
-                                }}
-                                buttonStyle={{ backgroundColor: "#886b57", borderRadius: 20, width: "100%" }}
-                                titleStyle={{ fontWeight: "bold", fontSize: 25 }}
-                                onPress={() => router.navigate({
-                                    pathname: "../../active-quest",
-                                    params: { questId: questId, cover: currentQuest?.cover }
-                                })}
-                            />
+                            {
+                                isFinished || finished ? "" : (
+                                    <Button
+                                        title={
+                                            buttonText
+                                        }
+                                        containerStyle={{
+                                            position: "absolute",
+                                            zIndex: 505,
+                                            bottom: 30,
+                                            left: 0,
+                                            right: 0,
+                                            paddingHorizontal: 20,
+                                        }}
+                                        buttonStyle={{ backgroundColor: "#886b57", borderRadius: 20, width: "100%" }}
+                                        titleStyle={{ fontWeight: "bold", fontSize: 25 }}
+                                        onPress={() => router.navigate({
+                                            pathname: "../../active-quest",
+                                            params: { questId: questId, cover: currentQuest?.cover }
+                                        })}
+                                    />
+                                )
+                            }
                         </>
                     )
                 )

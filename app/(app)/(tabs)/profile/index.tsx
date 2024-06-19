@@ -19,7 +19,7 @@ export default function TabFourScreen() {
     const user = auth.currentUser;
 
     const colorScheme = useColorScheme();
-    const [successQuest, setSuccessQuest] = useState(false);
+    // const [successQuest, setSuccessQuest] = useState(false);
     const [doneQuestAmount, setDoneQuestAmount] = useState(0);
     const [doneQuestionAmount, setDoneQuestionAmount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -69,7 +69,7 @@ export default function TabFourScreen() {
 
                 const success = await AsyncStorage.getItem("Success");
                 if (success !== null) {
-                    setSuccessQuest(true);
+                    // setSuccessQuest(true);
                     await AsyncStorage.removeItem("Success");
                 }
 
@@ -107,14 +107,14 @@ export default function TabFourScreen() {
                 <View style={{ paddingHorizontal: 30 }}>
                     <ThemedView style={{ flexDirection: "row", justifyContent: "flex-end", marginBottom: 30, paddingTop: 20 }}>
 
-                        <Button title="Обнулить данные" onPress={resetData} />
+                        {/* <Button title="Обнулить данные" onPress={resetData} /> */}
 
                         <Link href="/profile/edit">
                             <Icon name="gear" color={Colors[colorScheme ?? "light"].tint} />
                         </Link>
                     </ThemedView>
 
-                    <View style={{
+                    {/* <View style={{
                         flex: 1,
                         justifyContent: "center",
                         alignItems: "center"
@@ -122,7 +122,7 @@ export default function TabFourScreen() {
                         <ThemedText style={{ color: "#5e776b" }}>
                             {successQuest ? "Квест успешно пройден" : ""}
                         </ThemedText>
-                    </View>
+                    </View> */}
 
                     <View style={{
                         flex: 1,
