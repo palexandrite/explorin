@@ -61,7 +61,7 @@ export default function TabFourScreen() {
                     let answerAmount = 0;
                     notNullAnswers.forEach((item) => {
                         let [, value] = item;
-                        answerAmount += +value;
+                        answerAmount += Number(value);
                     });
                     setDoneQuestions(notNullAnswers);
                     setDoneQuestionAmount(answerAmount);
@@ -107,7 +107,7 @@ export default function TabFourScreen() {
                 <View style={{ paddingHorizontal: 30 }}>
                     <ThemedView style={{ flexDirection: "row", justifyContent: "flex-end", marginBottom: 30, paddingTop: 20 }}>
 
-                        {/* <Button title="Обнулить данные" onPress={resetData} /> */}
+                        <Button title="Обнулить данные" onPress={resetData} />
 
                         <Link href="/profile/edit">
                             <Icon name="gear" color={Colors[colorScheme ?? "light"].tint} />
