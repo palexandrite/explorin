@@ -1,4 +1,3 @@
-import { initMapHtml } from "@/mocks/Map";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 
@@ -97,9 +96,23 @@ export default () => {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        L.marker(position).addTo(map).bindPopup('Вы здесь').openPopup();
+        const marker = L.marker(position).addTo(map).bindPopup('Вы здесь').openPopup();
         ${jsStrings?.join(" ")}
 
+        const updateFogPosition = () => {
+            let markerLatLng = marker.getLatLng();
+            let markerPoint = map.latLngToLayerPoint(markerLatLng);
+            let fog = document.getElementById("fog");
+            // fog.style.clipPath = 'circle(100px at ' + markerPoint.x + 'px ' + markerPoint.y + 'px)';
+            fog.style.top = markerPoint.y + 'px';
+            fog.style.left = markerPoint.x + 'px';
+        };
+
+        map.on("move", updateFogPosition);
+        map.on("zoom", updateFogPosition);
+
+        updateFogPosition();
+        
         true; // note: this is required, or you'll sometimes get silent failures
     `;
 
@@ -113,12 +126,13 @@ export default () => {
                         <>
                             <WebView
                                 originWhitelist={['*']}
-                                source={{ html: initMapHtml }}
+                                // source={{ html: initMapHtml }}
+                                source={require("@/assets/leaflet-quest.html")}
                                 // injectedJavaScriptObject={{ targetPosition: targetPosition }}
                                 injectedJavaScript={myscript}
                             />
 
-                            <FogOfWar />
+                            {/* <FogOfWar /> */}
 
                             <Button
                                 title={
