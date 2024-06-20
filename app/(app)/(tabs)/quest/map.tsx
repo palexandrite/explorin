@@ -93,6 +93,24 @@ export default () => {
         });
     }
 
+    /**
+     * 
+     * Активация "Тумана войны"
+     * 
+     * const updateFogPosition = () => {
+            let markerLatLng = marker.getLatLng();
+            let markerPoint = map.latLngToLayerPoint(markerLatLng);
+            let fog = document.getElementById("fog");
+            // fog.style.clipPath = 'circle(100px at ' + markerPoint.x + 'px ' + markerPoint.y + 'px)';
+            fog.style.top = markerPoint.y + 'px';
+            fog.style.left = markerPoint.x + 'px';
+        };
+
+        map.on("move", updateFogPosition);
+        map.on("zoom", updateFogPosition);
+
+        updateFogPosition();
+     */
     const myscript = `
         const position = [${myLatitude}, ${myLongitude}];
 
@@ -106,19 +124,7 @@ export default () => {
         const marker = L.marker(position).addTo(map).bindPopup('Вы здесь').openPopup();
         ${jsStrings?.join(" ")}
 
-        const updateFogPosition = () => {
-            let markerLatLng = marker.getLatLng();
-            let markerPoint = map.latLngToLayerPoint(markerLatLng);
-            let fog = document.getElementById("fog");
-            // fog.style.clipPath = 'circle(100px at ' + markerPoint.x + 'px ' + markerPoint.y + 'px)';
-            fog.style.top = markerPoint.y + 'px';
-            fog.style.left = markerPoint.x + 'px';
-        };
-
-        map.on("move", updateFogPosition);
-        map.on("zoom", updateFogPosition);
-
-        updateFogPosition();
+        // туман должен быть тут
         
         true; // note: this is required, or you'll sometimes get silent failures
     `;

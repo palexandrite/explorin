@@ -1,4 +1,5 @@
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { Button } from "@rneui/base";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -107,7 +108,12 @@ export default function TabFourScreen() {
                 <View style={{ paddingHorizontal: 30 }}>
                     <ThemedView style={{ flexDirection: "row", justifyContent: "flex-end", marginBottom: 30, paddingTop: 20 }}>
 
-                        <Button title="Обнулить данные" onPress={resetData} />
+                        <Button
+                            title="Обнулить данные"
+                            color="#a2a4af"
+                            onPress={resetData}
+                            buttonStyle={{ marginEnd: 20, marginTop: -7 }}
+                        />
 
                         <Link href="/profile/edit">
                             <Icon name="gear" color={Colors[colorScheme ?? "light"].tint} />
